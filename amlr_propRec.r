@@ -90,5 +90,9 @@ mean(haul.len.scaled$fr,na.rm=TRUE)
 sd(haul.len.scaled$fr,na.rm=TRUE)
 # [1] 0.3384757
 
+save("haul.len.meas", file = "meanlenghtKrillAMLR.RData")
+save("haul.len.scaled", file = "meanscaledKrillAMLR.RData")
+
+
 
 

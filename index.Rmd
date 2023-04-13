@@ -1,0 +1,69 @@
+---
+title: "Data Prepair Template SS3"
+subtitle: "Alternative Analysis to incorporate in Krill Stock Assessment Model 48.1 SubArea"
+author: "Mardones, M; Watters, G.; Kinzey. D."
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+linkcolor: blue
+output:
+  html_document:
+    keep_md: true
+    toc: true
+    toc_deep: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    theme: cosmo
+    fontsize: 0.9em
+    linestretch: 1.7
+    html-math-method: katex
+    self-contained: true
+    code-tools: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup1}
+rm(list = ls())
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = 'center',
+                      dev = 'jpeg',
+                      dpi = 300)
+#XQuartz is a mess, put this in your onload to default to cairo instead
+options(bitmapType = "cairo") 
+# (https://github.com/tidyverse/ggplot2/issues/2655)
+# Lo mapas se hacen mas rapido
+```
+
+# Background
+
+The following document intends to carry out a complementary
+methodological analysis to correlate environmental variables with the
+population dynamics of krill (*Euphausia superba*), in this case, with a
+biological component like lengths from fishery monitoring.
+
+
+# Methodology
+
+Load data from Doug Kinzey code
+
+Load environmental data to merge with length.
+
+
+```{r echo=FALSE}
+load("~/DOCAS/Data/AMLR_Length_Data/meanscaledKrillAMLR.RData")
+```
+
+Get data specific object
+
+```{r include=FALSE}
+ls()
+get("haul.len.scaled")
+class(haul.len.scaled)
+names(haul.len.scaled)
+table(haul.len.scaled[,1])
+colnames(haul.len.scaled)
+```
+This object
