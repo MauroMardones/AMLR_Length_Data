@@ -13,6 +13,7 @@ dat.l <- subset(dat.l,dat.l$amlr_area=="EI" | dat.l$amlr_area =="SA" |
                 dat.l$amlr_area=="WA" | dat.l$amlr_area =="JI")
 dat.l <-cbind(Year=substr(dat.l$AMLR_Cruise,5,8),dat.l)
 dat.l <- dat.l[-which(is.na(dat.l$amount)),]
+
 ################
 sqkm.areas <- c(43865,18151,24479,38524)
 names(sqkm.areas) <- names.area <- c("EI","JI","SA","WA")
@@ -43,7 +44,7 @@ haul.scalor <- array(dim=dim(haul.meas))              # Number by which to scale
 # wt_len <- 0.00000503*(12:60)^3.283
 # length-wt from Hewitt et al 2004
 wt_len = 0.000002236*(12:60)^3.314; names(wt_len) <- 12:60
-
+plot(wt_len, type = "l")
 ################
 # LENGTH totals, scaled up from measured individuals per haul
 haul.len.scaled <- 

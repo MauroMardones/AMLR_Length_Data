@@ -2,7 +2,7 @@
 title: "Data prepara Template SS3"
 subtitle: "Alternative Analysis to incorporate in Krill Stock Assessment Model 48.1 SubArea"
 author: "Mardones, M; Watters, G.; Kinzey. D."
-date:  "`r format(Sys.time(), '%d %B, %Y')`"
+date:  "13 April, 2023"
 linkcolor: blue
 output:
   html_document:
@@ -23,7 +23,8 @@ editor_options:
     wrap: 72
 ---
 
-```{r setup1}
+
+```r
 rm(list = ls())
 knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
@@ -38,7 +39,8 @@ options(bitmapType = "cairo")
 ```
 
 
-```{r}
+
+```r
 library(tidyverse)
 library(ggridges)
 ```
@@ -55,21 +57,16 @@ biological component like lengths from fishery monitoring.
 
 Load data from Doug Kinzey code
 
-```{r echo=FALSE}
-load("~/DOCAS/Data/AMLR_Length_Data/meanscaledKrillAMLR.RData")
-```
+
 
 Get data specific object
 
-```{r include=FALSE}
-get("haul.len.scaled")
-class(haul.len.scaled)
-names(haul.len.scaled)
-```
+
 
 But, this structure is usefull for `SS3` template in `.dat`. 
 
-```{r warning=FALSE}
+
+```r
 dat.all <- # net length frequencies including zero hauls
            read.csv(file=paste("AMLR_Krill_LFD_data.csv",sep=""),sep=",",
 	   header=T,stringsAsFactors=F)
@@ -84,14 +81,16 @@ dat.l <- dat.l[-which(is.na(dat.l$amount)),]
 
 Expand frecuency data related length, in this case `amount` column have frecuency that we need expand to whole data frame. 
 
-```{r warning=FALSE}
+
+```r
 df <- dat.l %>% 
   type.convert(as.is = TRUE) %>% 
   uncount(amount)
 ```
 
 
-```{r}
+
+```r
 jzstrata <- ggplot(df ,
                    aes(x=length, 
                        y = as.factor(Year), 
@@ -115,9 +114,12 @@ jzstrata <- ggplot(df ,
   ylab("")
 jzstrata
 ```
+
+<img src="index_files/figure-html/unnamed-chunk-6-1.jpeg" style="display: block; margin: auto;" />
 by leg
 
-```{r}
+
+```r
 legtrata <- ggplot(df ,
                    aes(x=length, 
                        y = as.factor(Year), 
@@ -142,10 +144,13 @@ legtrata <- ggplot(df ,
 legtrata
 ```
 
+<img src="index_files/figure-html/unnamed-chunk-7-1.jpeg" style="display: block; margin: auto;" />
+
 
 Matrurity stage
 
-```{r}
+
+```r
 mattrata <- ggplot(df %>% 
                      filter(!maturity %in% c("FEM", "MALE", "UNKN")),
                    aes(x=length, 
@@ -170,10 +175,13 @@ mattrata <- ggplot(df %>%
   ylab("")
 mattrata
 ```
+
+<img src="index_files/figure-html/unnamed-chunk-8-1.jpeg" style="display: block; margin: auto;" />
 Give template structure by year.
 
 
-```{r}
+
+```r
 # cut in order
 df$catlon <- cut(x = df$length, 
                  breaks = seq(0,70,2),
@@ -184,8 +192,8 @@ dft <- table(df$Year, df$catlon)
 ```
 
 
-```{r eval=FALSE}
-write.csv(dft, "lenghtAMLR19912011.csv", sep = ",", row.names = TRUE)
 
+```r
+write.csv(dft, "lenghtAMLR19912011.csv", sep = ",", row.names = TRUE)
 ```
 
